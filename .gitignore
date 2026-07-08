@@ -30,3 +30,4 @@ codedb.snapshot
 .bank
 
 # Mycelium local DB is intentionally committed — do NOT ignore .mycelium/
+/.mimocode
