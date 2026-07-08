@@ -4,12 +4,11 @@ Turn a Waveshare RP2040-Zero into a physical notification indicator for macOS:
 when a mapped app gets a notification, its dedicated LED turns on; when you
 read the notification, the LED turns off.
 
-> This guide is the **corrected** English version of `ORIGINAL_GUIDE.md`.
-> Where the two disagree, **this repo is the source of truth** — the guide was
-> written before the firmware and daemon were finalized, so several details
-> (pin mapping, serial protocol, database path, DB access strategy, app
-> mapping) changed. Divergences are flagged inline with **⚠️ Changed from the
-> original guide**.
+> This guide tracks the **actual firmware and daemon** in this repo — where any
+> older write-up disagreed, **this repo is the source of truth**. Several details
+> (pin mapping, serial protocol, database path, DB access strategy, app mapping)
+> were finalized after the first draft; those points are flagged inline with
+> **⚠️ Changed from the original guide** for anyone following an earlier version.
 
 **Hardware used here:**
 - Waveshare RP2040-Zero ([wiki](https://www.waveshare.com/wiki/RP2040-Zero))
@@ -112,11 +111,7 @@ either rewire to the table above or edit the `pins` dict in `code.py`
 GP0–GP4 sit on the **top-right** of the board; the shared GND is the pin below
 5V on the **top-left**. Each LED is an independent branch off the common GND rail.
 
-![LED wiring diagram](docs/wiring-excalidraw.png)
-
-<sub>Sources in `docs/`: `wiring.excalidraw` (+ `wiring-excalidraw.svg`/`.png`) and
-`wiring.mmd` (+ `wiring-mermaid.png`). Regenerate the Mermaid PNG with
-`npx -y @mermaid-js/mermaid-cli -i docs/wiring.mmd -o docs/wiring-mermaid.png -b white -s 3`.</sub>
+<img width="1920" height="1080" alt="schema" src="https://github.com/user-attachments/assets/c542f42c-3840-485c-8dd2-d7ccbb19d21a" />
 
 <details>
 <summary>ASCII fallback (renders anywhere)</summary>
@@ -240,8 +235,8 @@ off            # turn ALL LEDs off
 
 The firmware also runs a non-blocking **heartbeat**: the onboard WS2812 blinks a
 dim green flash every 5 s so you can see the board is alive. And it sets
-`usb_cdc.data.timeout = 0.1` so `readline()` never blocks the loop (this was the
-root cause of the "serial channel is mute" bug documented in `STATUS.md`).
+`usb_cdc.data.timeout = 0.1` so `readline()` never blocks the loop (a blocking
+`readline()` was the root cause of an early "serial channel is mute" bug).
 
 3. [ ] **Unplug and replug USB** — `boot.py` is read only at power-on, not on save.
 4. [ ] Find the ports:
@@ -420,8 +415,6 @@ update can break it — if after an update the LEDs stop reacting and
 ## 📁 Repo layout
 
 - `circuitpy/` — exact snapshot of the board's `CIRCUITPY` drive (`boot.py`, `code.py`, `lib/neopixel.mpy`, `settings.toml`, `sd/`). Copy these to the board.
-- `docs/` — wiring diagram sources + exports: `wiring.excalidraw` (Excalidraw source) → `wiring-excalidraw.svg`/`.png`; `wiring.mmd` (Mermaid source) → `wiring-mermaid.png`.
 - `daemon.py` — the macOS host daemon (reads the notification DB, drives the LEDs over serial).
 - `test_leds.py` — host-side hardware tester; cycles all 5 LEDs using the serial protocol.
-- `ORIGINAL_GUIDE.md` — the original Italian guide (kept for reference; superseded by this file where they diverge).
-- `STATUS.md` — a historical debug handoff for the "mute serial channel" bug (now fixed via `usb_cdc.data.timeout`). Historical only.
+- `README.md` — project overview, hardware list, and the same wiring schema image used above.

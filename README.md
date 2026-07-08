@@ -65,6 +65,10 @@ off <color>   # turn off one LED
 off           # turn off all LEDs
 ```
 
+## Build guide
+
+For a step-by-step walkthrough (from unboxing to autostart), see **[TUTORIAL.md](TUTORIAL.md)**. It covers inventory, CircuitPython flash, wiring, firmware, the macOS daemon, and launchd autostart across six self-contained sessions.
+
 ## License
 
 MIT
