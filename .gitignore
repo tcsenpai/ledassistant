@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
+.AppleDouble
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs / local runtime
+*.log
+/tmp/
+
+# Local tooling
+codedb.snapshot
+.bank
+
+# Mycelium local DB is intentionally committed — do NOT ignore .mycelium/
