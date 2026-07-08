@@ -17,7 +17,7 @@ The daemon reconnects automatically if the USB link drops. The board runs a hear
 - 5 LEDs on GP0 through GP4 (blue, yellow, red, green, white)
 - Current-limiting resistors on each LED
 
-## Schema
+## Schema
 
 <img width="1920" height="1080" alt="schema" src="https://github.com/user-attachments/assets/c542f42c-3840-485c-8dd2-d7ccbb19d21a" />
 
