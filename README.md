@@ -3,6 +3,7 @@
 Physical LED notifications for macOS. A daemon reads the macOS notification database, matches apps to colors, and drives LEDs on an RP2040 board over USB serial.
 
 <img width="1920" height="1440" alt="image" src="https://github.com/user-attachments/assets/66687ca8-fd63-412f-ae2a-447ee2a9a9a9" />
+
 _Here's the system running! The frontal device is not related to this project, look at the leds_
 
 ## How it works
